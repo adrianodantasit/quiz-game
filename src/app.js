@@ -39,7 +39,7 @@ class App extends React.Component {
     if (questions.length > 0 && current < 10) {
       console.log(questions, current);
       return (
-        <div>
+        <div className="interface">
           <Question
             questions={questions}
             current={current}

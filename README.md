@@ -43,8 +43,7 @@ npm run build
 ## TODO
 
 - Interface
-- Chosen answer and its handlers
-- Store Correct/Incorret
+- Add countdown timer
 - Restart quiz
 - Choose difficulty easy/medium/hard
 - Choose categories

@@ -4,12 +4,14 @@ import "../src/sass/main.scss";
 import Question from "./Question";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       questions: [],
-      current: 0
+      current: 0,
+      correct: 0,
+      incorrect: 0
     };
   }
 
@@ -29,7 +31,14 @@ class App extends React.Component {
       );
   };
 
-  handleClick = current => {
+  handleAnswer = (current, answer) => {
+    if (this.state.questions[current].correct_answer === answer) {
+      this.setState({ correct: this.state.correct + 1 });
+    } else if (
+      this.state.questions[current].incorrect_answers.includes(answer)
+    ) {
+      this.setState({ incorrect: this.state.incorrect + 1 });
+    }
     this.setState({ current: current + 1 });
   };
 
@@ -37,13 +46,13 @@ class App extends React.Component {
     const { questions, current } = this.state;
 
     if (questions.length > 0 && current < 10) {
-      console.log(questions, current);
+      console.log(this.state);
       return (
         <div className="interface">
           <Question
             questions={questions}
             current={current}
-            handleClick={this.handleClick}
+            handleAnswer={this.handleAnswer}
           />
         </div>
       );

@@ -5,7 +5,18 @@ class Question extends React.Component {
     super(props);
   }
 
-  shuffleAnswer = array => {
+  // Convert ASCII codes to chars
+  decodeASCII = string => {
+    var parser = new DOMParser();
+    var dom = parser.parseFromString(
+      "<!doctype html><body>" + string,
+      "text/html"
+    );
+    var decodedString = dom.body.textContent;
+    return decodedString;
+  };
+
+  shuffleAnswers = array => {
     // Using the Fisher–Yates shuffle Algorithm
     let temporary, randomIndex;
 
@@ -29,12 +40,12 @@ class Question extends React.Component {
       ...questions[current].incorrect_answers //Spread Operator
     ];
 
-    arrayAnswers = this.shuffleAnswer(arrayAnswers);
+    arrayAnswers = this.shuffleAnswers(arrayAnswers);
 
     return (
       <div className="card" key={current}>
         <div className="card__question">
-          <p> {questions[current].question}</p>
+          <p> {this.decodeASCII(questions[current].question)}</p>
         </div>
         <div className="card__answers">
           {arrayAnswers.map((answer, i) => {
@@ -44,7 +55,7 @@ class Question extends React.Component {
                 className={`card__answers--${i}`}
                 onClick={e => handleAnswer(current, answer)}
               >
-                {i}) {answer}
+                {i}) {this.decodeASCII(answer)}
               </p>
             );
           })}

@@ -1,0 +1,30 @@
+.button {
+  width: 14rem;
+  height: 7rem;
+  padding: 0 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-button-selected;
+    transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: scale(1.03) translateY(-3px);
+    box-shadow: 1px 2px 2px rgba($color-black, 0.4);
+    backface-visibility: hidden;
+  }
+
+  &:active {
+    transform: scale(0.98) translateY(0);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &__reset {
+    background-color: $color-white;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    float: right;
+  }
+}

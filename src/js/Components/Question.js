@@ -42,6 +42,8 @@ class Question extends Component {
 
     arrayAnswers = this.shuffleAnswers(arrayAnswers);
 
+    console.log(questions);
+
     return (
       <div className="card" key={current}>
         <div className="card__question">

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import "../../sass/main.scss";
 import Question from "../Components/Question";
+import Results from "../Components/Results";
 
 class App extends Component {
   constructor() {
@@ -17,7 +18,7 @@ class App extends Component {
 
   componentDidMount = () => {
     this.fetchQuestions(
-      "https://opentdb.com/api.php?amount=10&difficulty=hard&type=multiple"
+      "https://opentdb.com/api.php?amount=2&difficulty=hard&type=multiple"
     );
   };
 
@@ -42,11 +43,17 @@ class App extends Component {
     this.setState({ current: current + 1 });
   };
 
+  handleReset = () => {
+    this.setState({ current: 0, correct: 0, incorrect: 0 });
+    this.fetchQuestions(
+      "https://opentdb.com/api.php?amount=2&difficulty=hard&type=multiple"
+    );
+  };
+
   render() {
     const { questions, current, correct, incorrect } = this.state;
 
-    if (questions.length > 0 && current < 10) {
-      console.log(this.state);
+    if (questions.length > 0 && current < questions.length) {
       return (
         <div className="interface">
           <Question
@@ -56,10 +63,14 @@ class App extends Component {
           />
         </div>
       );
-    } else if (current === 10) {
+    } else if (questions.length > 0 && current === questions.length) {
       return (
         <div className="interface">
-          <Results correct={correct} incorrect={incorrect} />
+          <Results
+            correct={correct}
+            incorrect={incorrect}
+            handleReset={this.handleReset}
+          />
         </div>
       );
     } else {

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { render } from "react-dom";
-import "../src/sass/main.scss";
-import Question from "./Question";
+import "../../sass/main.scss";
+import Question from "../Components/Question";
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
 
@@ -43,7 +43,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { questions, current } = this.state;
+    const { questions, current, correct, incorrect } = this.state;
 
     if (questions.length > 0 && current < 10) {
       console.log(this.state);
@@ -54,6 +54,12 @@ class App extends React.Component {
             current={current}
             handleAnswer={this.handleAnswer}
           />
+        </div>
+      );
+    } else if (current === 10) {
+      return (
+        <div className="interface">
+          <Results correct={correct} incorrect={incorrect} />
         </div>
       );
     } else {

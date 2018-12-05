@@ -44,7 +44,6 @@ npm run build
 
 - Interface
 - Add countdown timer
-- Restart quiz
 - Choose difficulty easy/medium/hard
 - Choose categories
 

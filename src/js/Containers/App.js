@@ -16,11 +16,11 @@ class App extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.fetchQuestions(
-      "https://opentdb.com/api.php?amount=2&difficulty=hard&type=multiple"
+      "https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple"
     );
-  };
+  }
 
   fetchQuestions = url => {
     fetch(url)
@@ -44,9 +44,9 @@ class App extends Component {
   };
 
   handleReset = () => {
-    this.setState({ current: 0, correct: 0, incorrect: 0 });
+    this.setState({ current: 0, correct: 0, incorrect: 0, questions: [] });
     this.fetchQuestions(
-      "https://opentdb.com/api.php?amount=2&difficulty=hard&type=multiple"
+      "https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple"
     );
   };
 
@@ -73,13 +73,12 @@ class App extends Component {
           />
         </div>
       );
-    } else {
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      );
     }
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
   }
 }
 

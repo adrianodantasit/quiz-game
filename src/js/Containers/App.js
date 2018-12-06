@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import "../../sass/main.scss";
 import Question from "../Components/Question";
 import Results from "../Components/Results";
+import Loading from "../Components/Loading";
 
 class App extends Component {
   constructor() {
@@ -53,30 +54,30 @@ class App extends Component {
   render() {
     const { questions, current, correct, incorrect } = this.state;
 
-    if (questions.length > 0 && current < questions.length) {
-      return (
-        <div className="interface">
+    /*
+      Inside the Brackets:
+      1 - Rendering the questions (question has data and current question smaller than questions arr length)
+      2 - Rendering the results (question has data and current question equal to questions arr length)
+      3 - Loading Spinner while has no data
+    */
+
+    return (
+      <div className="interface">
+        {questions.length > 0 && current < questions.length && (
           <Question
             questions={questions}
             current={current}
             handleAnswer={this.handleAnswer}
           />
-        </div>
-      );
-    } else if (questions.length > 0 && current === questions.length) {
-      return (
-        <div className="interface">
+        )}
+        {questions.length > 0 && current === questions.length && (
           <Results
             correct={correct}
             incorrect={incorrect}
             handleReset={this.handleReset}
           />
-        </div>
-      );
-    }
-    return (
-      <div>
-        <p>Loading...</p>
+        )}
+        {questions.length === 0 && <Loading />}
       </div>
     );
   }

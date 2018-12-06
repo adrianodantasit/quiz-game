@@ -1,0 +1,9 @@
+.loading {
+  margin: auto;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  border: 0.8rem solid $color-black;
+  border-top-color: $color-white;
+  animation: spin 1s infinite linear;
+}

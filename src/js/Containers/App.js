@@ -76,17 +76,8 @@ class App extends Component {
             incorrect={incorrect}
             handleReset={this.handleReset}
           />
-<<<<<<< HEAD
         )}
         {questions.length === 0 && <Loading />}
-=======
-        </div>
-      );
-    }
-    return (
-      <div>
-        <p>Loading...</p>
->>>>>>> ecb06e89a8156d1c5c007cf8127625e3d944dedf
       </div>
     );
   }

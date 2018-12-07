@@ -2,10 +2,15 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 6rem;
   padding-top: 2rem;
 
+  @include respond(phone) {
+    height: 50%;
+    justify-content: space-between;
+  }
+
   & > * {
+    flex-basis: 100%;
     margin-bottom: 1rem;
   }
 }

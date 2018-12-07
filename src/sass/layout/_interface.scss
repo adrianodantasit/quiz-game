@@ -10,4 +10,8 @@
     url("https://picsum.photos/1600/1200/?random");
   background-size: cover;
   background-position: center;
+
+  @include respond(phone) {
+    justify-content: center;
+  }
 }

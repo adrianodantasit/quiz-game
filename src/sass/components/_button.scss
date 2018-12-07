@@ -4,6 +4,7 @@
   padding: 0 1rem;
   border-radius: 5px;
   cursor: pointer;
+  text-transform: uppercase;
 
   &:hover {
     background-color: $color-button-selected;
@@ -24,7 +25,12 @@
   &__reset {
     background-color: $color-white;
     font-size: 1.8rem;
-    text-transform: uppercase;
     float: right;
+  }
+
+  &__start {
+    background-color: rgba($color-grey-light, 0.3);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
   }
 }

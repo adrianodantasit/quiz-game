@@ -1,0 +1,31 @@
+.options {
+  width: 30rem;
+  height: 30rem;
+  margin: auto;
+  padding: 1.5rem;
+  border-radius: 5px;
+  background-color: $color-white;
+  box-shadow: 1rem 1rem 1rem rgba($color-black, 0.6);
+  font-size: 1.5rem;
+  text-align: center;
+
+  &__button {
+    width: 13rem;
+    height: 8rem;
+    font-size: 2.1rem;
+    text-transform: uppercase;
+  }
+
+  &__input--number,
+  &__input--select {
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    margin-left: 1rem;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

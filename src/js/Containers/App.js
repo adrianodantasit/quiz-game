@@ -110,7 +110,7 @@ class App extends Component {
               handleField={this.handleField}
               amount_of_questions={amount}
             />
-            <button className="button" onClick={this.handleStart}>
+            <button className="button button__start" onClick={this.handleStart}>
               Start
             </button>
           </div>

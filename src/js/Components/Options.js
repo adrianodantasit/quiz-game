@@ -11,8 +11,8 @@ class Options extends Component {
 
   render() {
     return (
-      <form>
-        <label>Number of Questions:</label>
+      <form className="form">
+        <label>How many questions?</label>
         <input
           type="number"
           min="1"

@@ -4,6 +4,7 @@ import "../../sass/main.scss";
 import Question from "../Components/Question";
 import Results from "../Components/Results";
 import Loading from "../Components/Loading";
+import Options from "../Components/Options";
 
 class App extends Component {
   constructor() {
@@ -11,17 +12,17 @@ class App extends Component {
 
     this.state = {
       questions: [],
+      min_questions: 1,
+      max_questions: 20,
       current: 0,
       correct: 0,
-      incorrect: 0
+      incorrect: 0,
+      amount: 1,
+      difficulty: "easy"
     };
   }
 
-  componentDidMount() {
-    this.fetchQuestions(
-      "https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple"
-    );
-  }
+  componentDidMount() {}
 
   fetchQuestions = url => {
     fetch(url)
@@ -44,15 +45,41 @@ class App extends Component {
     this.setState({ current: current + 1 });
   };
 
+  handleField = (value, field) => {
+    if (field === "input-amount") this.setState({ amount: value });
+    else if (field === "input-difficulty") this.setState({ difficulty: value });
+  };
+
   handleReset = () => {
-    this.setState({ current: 0, correct: 0, incorrect: 0, questions: [] });
-    this.fetchQuestions(
-      "https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple"
-    );
+    this.setState({
+      current: 0,
+      correct: 0,
+      incorrect: 0,
+      questions: [],
+      amount: 1,
+      difficulty: "easy"
+    });
+  };
+
+  handleStart = () => {
+    let url =
+      "https://opentdb.com/api.php?amount=%amount%&difficulty=%difficulty%&type=multiple";
+    if (this.state.difficulty !== "any") {
+      url = url.replace("%difficulty%", this.state.difficulty);
+    } else {
+      url = url.replace("%difficulty%", "");
+    }
+    url = url.replace("%amount%", parseInt(this.state.amount));
+    if (
+      this.state.amount >= this.state.min_questions &&
+      this.state.amount <= this.state.max_questions
+    ) {
+      this.fetchQuestions(url);
+    }
   };
 
   render() {
-    const { questions, current, correct, incorrect } = this.state;
+    const { questions, current, correct, incorrect, amount } = this.state;
 
     /*
       Inside the Brackets:
@@ -77,7 +104,17 @@ class App extends Component {
             handleReset={this.handleReset}
           />
         )}
-        {questions.length === 0 && <Loading />}
+        {questions.length === 0 && (
+          <div className="options">
+            <Options
+              handleField={this.handleField}
+              amount_of_questions={amount}
+            />
+            <button className="button" onClick={this.handleStart}>
+              Start
+            </button>
+          </div>
+        )}
       </div>
     );
   }

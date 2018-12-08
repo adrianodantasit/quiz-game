@@ -5,6 +5,7 @@ import Question from "../Components/Question";
 import Results from "../Components/Results";
 import Loading from "../Components/Loading";
 import Options from "../Components/Options";
+import Countdown from "../Components/Countdown";
 
 class App extends Component {
   constructor() {
@@ -78,6 +79,13 @@ class App extends Component {
     }
   };
 
+  handleTimeLimit = () => {
+    this.setState({
+      incorrect: this.state.incorrect + 1,
+      current: this.state.current + 1
+    });
+  };
+
   render() {
     const { questions, current, correct, incorrect, amount } = this.state;
 
@@ -91,11 +99,14 @@ class App extends Component {
     return (
       <div className="interface">
         {questions.length > 0 && current < questions.length && (
-          <Question
-            questions={questions}
-            current={current}
-            handleAnswer={this.handleAnswer}
-          />
+          <React.Fragment>
+            <Question
+              questions={questions}
+              current={current}
+              handleAnswer={this.handleAnswer}
+            />
+            <Countdown handleTimeLimit={this.handleTimeLimit} />
+          </React.Fragment>
         )}
         {questions.length > 0 && current === questions.length && (
           <Results
@@ -121,3 +132,32 @@ class App extends Component {
 }
 
 render(<App />, document.getElementById("root"));
+
+/*
+{questions.length > 0 && current < questions.length && (
+          <Question
+            questions={questions}
+            current={current}
+            handleAnswer={this.handleAnswer}
+          />
+        )}
+        {questions.length > 0 && current === questions.length && (
+          <Results
+            correct={correct}
+            incorrect={incorrect}
+            handleReset={this.handleReset}
+          />
+        )}
+        {questions.length === 0 && (
+          <div className="options">
+            <Options
+              handleField={this.handleField}
+              amount_of_questions={amount}
+            />
+            <button className="button button__start" onClick={this.handleStart}>
+              Start
+            </button>
+          </div>
+        )}
+
+*/

@@ -42,10 +42,8 @@ npm run build
 
 ## TODO
 
-- Interface
+- Improve the Interface
 - Add countdown timer
-- Choose difficulty easy/medium/hard
-- Choose categories
 
 ## Built With
 

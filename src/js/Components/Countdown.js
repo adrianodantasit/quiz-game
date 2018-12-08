@@ -17,9 +17,9 @@ class Countdown extends Component {
 
     this.setState({ secondsRemaining: seconds });
 
-    if (seconds === 0) {
+    if (seconds === 0 || this.props.chosen) {
       clearInterval(this.timer);
-      this.props.handleTimeLimit();
+      this.props.handleTimeLimit(this.props.chosen);
       this.setState({ secondsRemaining: this.state.seconds });
       this.startCountDown();
     }

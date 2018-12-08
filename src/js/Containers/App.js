@@ -6,6 +6,7 @@ import Results from "../Components/Results";
 import Loading from "../Components/Loading";
 import Options from "../Components/Options";
 import Countdown from "../Components/Countdown";
+import { throws } from "assert";
 
 class App extends Component {
   constructor() {
@@ -19,7 +20,8 @@ class App extends Component {
       correct: 0,
       incorrect: 0,
       amount: 1,
-      difficulty: "easy"
+      difficulty: "easy",
+      chosen: false
     };
   }
 
@@ -43,7 +45,7 @@ class App extends Component {
     ) {
       this.setState({ incorrect: this.state.incorrect + 1 });
     }
-    this.setState({ current: current + 1 });
+    this.setState({ current: current + 1, chosen: true });
   };
 
   handleField = (value, field) => {
@@ -79,15 +81,27 @@ class App extends Component {
     }
   };
 
-  handleTimeLimit = () => {
-    this.setState({
-      incorrect: this.state.incorrect + 1,
-      current: this.state.current + 1
-    });
+  handleTimeLimit = chosen => {
+    if (!chosen) {
+      this.setState({
+        incorrect: this.state.incorrect + 1,
+        current: this.state.current + 1,
+        chosen: false
+      });
+    } else {
+      this.setState({ chosen: false });
+    }
   };
 
   render() {
-    const { questions, current, correct, incorrect, amount } = this.state;
+    const {
+      questions,
+      current,
+      correct,
+      incorrect,
+      amount,
+      chosen
+    } = this.state;
 
     /*
       Inside the Brackets:
@@ -105,7 +119,7 @@ class App extends Component {
               current={current}
               handleAnswer={this.handleAnswer}
             />
-            <Countdown handleTimeLimit={this.handleTimeLimit} />
+            <Countdown handleTimeLimit={this.handleTimeLimit} chosen={chosen} />
           </React.Fragment>
         )}
         {questions.length > 0 && current === questions.length && (

@@ -40,10 +40,13 @@ For deploy the production version:
 npm run build
 ```
 
+## Live version
+
+You can check the live version of this project in this link: https://quiz-adri.netlify.com/
+
 ## TODO
 
 - Improve the Interface
-- Add countdown timer
 
 ## Built With
 

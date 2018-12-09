@@ -6,7 +6,6 @@ import Results from "../Components/Results";
 import Loading from "../Components/Loading";
 import Options from "../Components/Options";
 import Countdown from "../Components/Countdown";
-import { throws } from "assert";
 
 class App extends Component {
   constructor() {
@@ -114,12 +113,12 @@ class App extends Component {
       <div className="interface">
         {questions.length > 0 && current < questions.length && (
           <React.Fragment>
+            <Countdown handleTimeLimit={this.handleTimeLimit} chosen={chosen} />
             <Question
               questions={questions}
               current={current}
               handleAnswer={this.handleAnswer}
             />
-            <Countdown handleTimeLimit={this.handleTimeLimit} chosen={chosen} />
           </React.Fragment>
         )}
         {questions.length > 0 && current === questions.length && (

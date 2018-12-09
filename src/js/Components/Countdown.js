@@ -12,20 +12,26 @@ class Countdown extends Component {
     this.startCountDown();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   tick = () => {
     let seconds = this.state.secondsRemaining - 1;
 
-    this.setState({ secondsRemaining: seconds });
+    if (seconds < 10) {
+      this.setState({ secondsRemaining: "0" + seconds });
+    }
 
     if (seconds === 0 || this.props.chosen) {
       clearInterval(this.timer);
       this.props.handleTimeLimit(this.props.chosen);
-      this.setState({ secondsRemaining: this.state.seconds });
       this.startCountDown();
     }
   };
 
   startCountDown = () => {
+    this.setState({ secondsRemaining: this.state.seconds });
     this.timer = setInterval(this.tick, 1000);
   };
 

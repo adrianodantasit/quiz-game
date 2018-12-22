@@ -47,6 +47,7 @@ You can check the live version of this project in this link: https://quiz-adri.n
 ## TODO
 
 - Improve the Interface
+- Add tests
 
 ## Built With
 
